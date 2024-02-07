@@ -24,23 +24,26 @@ class EmojiGame extends Component {
     gameInProgress: true,
     topScore: 0,
   }
-
+// resetting game for playagain
   resetGame = () => {
     this.setState({emojisClickedList: [], gameInProgress: true})
   }
-
+  
+//getting list of shuffled emoji's list
   getShuffledEmojis = () => {
     const {emojisList} = this.props
     const shuffledEmojisList = emojisList.sort(() => Math.random() - 0.5)
     return shuffledEmojisList
   }
 
+  // based on score finish and seting topScore
   finishGameAndSetTopScore = score => {
     const {topScore} = this.state
     const newTopScore = score > topScore ? score : topScore
     this.setState({topScore: newTopScore, gameInProgress: false})
   }
 
+  // passing objects to WinOrLossCard componnet by checking length
   renderScoreCard = () => {
     const {emojisList} = this.props
     const {emojisClickedList} = this.state
@@ -54,6 +57,7 @@ class EmojiGame extends Component {
     )
   }
 
+//finding whether emoji is clicked or not by passing id as argument
   isEmojiClicked = id => {
     const {emojisList} = this.props
     const {emojisClickedList} = this.state
@@ -66,6 +70,7 @@ class EmojiGame extends Component {
     this.setState({emojisClickedList: [...emojisClickedList, id]})
   }
 
+// passing objects to EmojiCard Component
   renderEmojiCard = () => {
     const {shuffledEmojisList} = this.getShuffledEmojis()
     return (
